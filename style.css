@@ -1,0 +1,322 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* FUNDO LUNAR MÁGICO (Céu noturno profundo com as cores favoritas) */
+body {
+  height: 100vh;
+  background: linear-gradient(270deg, #060919, #0d1633, #152042, #060919);
+  background-size: 600% 600%;
+  animation: bgAnimation 16s ease infinite;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Great Vibes', cursive;
+  overflow: hidden;
+  text-align: center;
+  color: #ffffff;
+  transition: background 8s ease, color 8s ease;
+}
+
+/* MODO NOITE / MÚSICA TOCANDO: Nebulosa Lunar viva com Azul, Roxo, Vermelho e Verde */
+body.mood-shift {
+  background: linear-gradient(270deg, #03040f, #180929, #2b0818, #072217, #03040f);
+  background-size: 800% 800%;
+}
+
+/* Cores de texto unificadas e com brilho lunar */
+body h1,
+body p,
+body #surprise {
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px rgba(110, 168, 254, 0.3);
+}
+
+@keyframes bgAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* CONTAINER GLASS (Efeito vidro fosco lunar) */
+.container {
+  padding: 45px 55px;
+  border-radius: 28px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
+  z-index: 2;
+
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TEXTO PRINCIPAL */
+h1 {
+  font-size: 3.6rem;
+  white-space: nowrap;
+  border-right: 3px solid rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* TEXTO */
+p {
+  font-size: 1.5rem;
+  margin-top: 8px;
+}
+
+/* BOTÃO LUNAR */
+#playBtn {
+  margin-top: 24px;
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+
+  background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+  color: #0f172a;
+
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 6px 18px rgba(0,0,0,0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#playBtn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+/* BOTÃO TOCANDO */
+#playBtn.playing {
+  animation: pulseLunar 1.5s infinite alternate;
+}
+
+@keyframes pulseLunar {
+  0% { 
+    transform: scale(1); 
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 30px rgba(168, 85, 247, 0.6); 
+  }
+  100% { 
+    transform: scale(1.12); 
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.8), 0 0 40px rgba(34, 197, 94, 0.6); 
+  }
+}
+
+#surprise {
+  margin-top: 22px;
+  font-size: 1.7rem;
+  
+  opacity: 0;
+  transform: translateY(30px);
+
+  transition:
+    opacity 7s ease,
+    transform 7s ease;
+}
+
+/* estado visível */
+#surprise.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ELEMENTOS CAINDO */
+.heart {
+  position: absolute;
+  top: -10vh;
+  font-size: 1.3rem;
+  animation: fall linear forwards;
+  opacity: 0.9;
+  pointer-events: none;
+  text-shadow: 0 0 8px currentColor;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* CLIQUE COM BRILHO */
+.spark {
+  position: absolute;
+  font-size: 22px;
+  animation: spark 1s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes spark {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-40px) scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+  h1 { font-size: 2.4rem; }
+  p, #surprise { font-size: 1.15rem; }
+  .container { padding: 35px 30px; }
+  #playBtn {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+  }
+}
+
+body.mood-shift::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  transition: background 8s ease;
+  background: rgba(0, 0, 0, 0.35); 
+}
+
+/* CONTAINER GLASS */
+.container {
+  position: relative; /* Mantém o container como referência */
+  padding: 45px 55px;
+  border-radius: 28px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
+  z-index: 2;
+
+  animation: fadeIn 2s ease forwards;
+}
+
+/* O BRILHO CENTRALIZADO EXATAMENTE ATRÁS DA CAIXA (Mais forte) */
+.glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  /* Cores mais vibrantes e concentradas */
+  background: radial-gradient(circle, 
+    rgba(168, 85, 247, 0.8) 0%,   /* Roxo forte */
+    rgba(59, 130, 246, 0.7) 35%,  /* Azul forte */
+    rgba(34, 197, 94, 0.5) 70%,   /* Verde */
+    transparent 100%
+  );
+  filter: blur(40px);
+  z-index: -1; 
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 2s ease;
+}
+
+/* Quando a música toca, o brilho já fica bem marcante */
+body.mood-shift .glow-bg {
+  opacity: 0.95;
+}
+
+/* ANIMAÇÃO DE PULSAÇÃO INTENSA NO DROP (25.08s) */
+@keyframes pulseBehindBox {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+    filter: blur(40px);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.6); /* Expande bastante para fora da caixa */
+    opacity: 1;                                  /* Brilho no máximo */
+    filter: blur(55px);
+  }
+}
+
+/* Quando atinge 25.08s, o brilho explode em intensidade por trás */
+body.beat-pulse .glow-bg {
+  animation: pulseBehindBox 1.2s infinite alternate ease-in-out;
+}
+/* EFEITO DE AURORA / LUZ NEBULOSA (Com cores favoritas integradas) */
+body::after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  
+  /* Gradiente com roxo, azul, verde e vermelho bem suaves */
+  background: radial-gradient(circle, 
+    rgba(139, 92, 246, 0.18) 0%,   /* Roxo */
+    rgba(59, 130, 246, 0.14) 25%,  /* Azul */
+    rgba(34, 197, 94, 0.10) 50%,   /* Verde */
+    rgba(239, 68, 68, 0.08) 75%,   /* Vermelho */
+    transparent 100%
+  );
+  
+  animation: auroraMove 25s ease infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.4; /* Já começa visível de forma elegante */
+  transition: opacity 8s ease;
+}
+
+/* Quando a música toca, a nebulosa ganha mais destaque */
+body.mood-shift::after {
+  opacity: 0.85;
+}
+
+@keyframes auroraMove {
+  0% {
+    transform: translate(-5%, -5%) rotate(0deg);
+  }
+  33% {
+    transform: translate(5%, -2%) rotate(5deg);
+  }
+  66% {
+    transform: translate(-2%, 5%) rotate(-5deg);
+  }
+  100% {
+    transform: translate(5%, 5%) rotate(0deg);
+  }
+}
+/* ANIMAÇÃO COM FADE-IN E FLUTUAÇÃO AO CLICAR FORA */
+@keyframes sparkFadeAnim {
+  0% {
+    transform: translate(-50%, 0) scale(0.5);
+    opacity: 0; /* Começa invisível para dar o fade-in */
+  }
+  20% {
+    opacity: 1; /* Aparece por completo rapidamente */
+  }
+  100% {
+    transform: translate(-50%, -70px) scale(1.1);
+    opacity: 0; /* Some suavemente no topo */
+  }
+}
